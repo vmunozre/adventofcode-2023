@@ -8,4 +8,4 @@ To test files:
 
 Example: 
 
-`npm run day src/01/01.ts`
+`npm run day src/01/01.1.ts`
