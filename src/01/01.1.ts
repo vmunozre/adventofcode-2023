@@ -1,3 +1,4 @@
+// https://adventofcode.com/2023/day/1 - part 1
 import fs from 'node:fs/promises'
 
 const INPUT_FILE_PATH = 'src/01/input.txt'
@@ -6,12 +7,10 @@ const OUTPUT_FILE_PATH = 'src/01/output.txt'
 async function main (): Promise<void> {
   // read file
   const file = await fs.open(INPUT_FILE_PATH)
-  // const numberByLines: number[] = []
   let total: number = 0
   for await (const line of file.readLines()) {
       const number = getNumberFromLine(line)
       console.log(`number: ${number} from line: ${line}`)
-      // numberByLines.push(number)
       total += number
   }
 
