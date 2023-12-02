@@ -2,17 +2,15 @@
 import fs from 'node:fs/promises'
 
 const INPUT_FILE_PATH = 'src/02/input.txt'
-const OUTPUT_FILE_PATH = 'src/02/output.txt'
-
-const MAX_COLORS = {
-  red: 12,
-  green: 13,
-  blue: 14
-}
+const OUTPUT_FILE_PATH = 'src/02/output2.txt'
 
 interface Game {
   id: number
-  isPossible: boolean
+  colors: {
+    red: number
+    green: number
+    blue: number
+  }
   fullLine: string
 }
 
@@ -22,10 +20,9 @@ async function main (): Promise<void> {
   let total: number = 0
   for await (const line of file.readLines()) {
       const game = getGameFromLine(line)
-      console.log(`game: ${game.id} is ${game.isPossible ? 'possible' : 'impossible'}, line: ${game.fullLine}`)
-      if (game.isPossible) {
-        total += game.id
-      }
+      console.log(`game: ${game.id} has ${game.colors.red} red, ${game.colors.green} green, ${game.colors.blue} blue, line: ${game.fullLine}`)
+      const lineMultiplier = game.colors.red * game.colors.green * game.colors.blue
+      total += lineMultiplier
   }
 
   console.log(`total: ${total}`)
@@ -37,7 +34,11 @@ async function main (): Promise<void> {
 function getGameFromLine (line: string): Game {
   const game: Game = {
     id: 0,
-    isPossible: true,
+    colors: {
+      red: 0,
+      green: 0,
+      blue: 0
+    },
     fullLine: line
   }
   const parts = line.split(":")
@@ -53,16 +54,16 @@ function getGameFromLine (line: string): Game {
       const quantity = Number(colorParts.shift())
       
       const colorName = colorParts.join("").trim() as string
-      if (
-        (colorName === "red" && quantity > MAX_COLORS.red) || 
-        (colorName === "green" && quantity > MAX_COLORS.green) || 
-        (colorName === "blue" && quantity > MAX_COLORS.blue)
-      ) {
-        game.isPossible = false
-        break
+      if (colorName === "red" && game.colors.red <= quantity) {
+        game.colors.red = quantity
+      }
+      if (colorName === "green" && game.colors.green <= quantity) {
+        game.colors.green = quantity
+      }
+      if (colorName === "blue" && game.colors.blue <= quantity) {
+        game.colors.blue = quantity
       }
     }
-    if (!game.isPossible) break
   }
 
   return game
