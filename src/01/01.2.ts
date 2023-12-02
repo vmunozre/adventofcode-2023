@@ -2,7 +2,7 @@
 import fs from 'node:fs/promises'
 
 const INPUT_FILE_PATH = 'src/01/input.txt'
-const OUTPUT_2_FILE_PATH = 'src/01/output2.txt'
+const OUTPUT_FILE_PATH = 'src/01/output2.txt'
 
 async function main (): Promise<void> {
   // read file
@@ -16,7 +16,7 @@ async function main (): Promise<void> {
   }
 
   console.log(`total: ${total}`)
-  fs.writeFile(OUTPUT_2_FILE_PATH, total.toString())
+  fs.writeFile(OUTPUT_FILE_PATH, total.toString())
 }
 
 // Example input - output
