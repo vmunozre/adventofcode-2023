@@ -1,4 +1,4 @@
-// https://adventofcode.com/2023/day/2 - part 1
+// https://adventofcode.com/2023/day/3 - part 1
 import fs from 'node:fs/promises'
 
 const INPUT_FILE_PATH = 'src/03/input.txt'
