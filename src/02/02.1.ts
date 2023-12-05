@@ -1,5 +1,5 @@
 // https://adventofcode.com/2023/day/2 - part 1
-import fs from 'node:fs/promises'
+import * as fs from 'node:fs/promises'
 
 const INPUT_FILE_PATH = 'src/02/input.txt'
 const OUTPUT_FILE_PATH = 'src/02/output.txt'
